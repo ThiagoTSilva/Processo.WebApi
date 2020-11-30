@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Processo.WebApi.Repositories
 {
-    public class BeneficioRepository : BaseRepository<Model.Beneficio>, IBeneficioRepository
+    public class BeneficioRepository : BaseRepository<Beneficio>, IBeneficioRepository
     {
         private ContextDb db;
         public BeneficioRepository(ContextDb context) : base(context)
@@ -14,7 +14,7 @@ namespace Processo.WebApi.Repositories
             db = context;
         }
 
-        public IEnumerable<Model.Beneficio> GetBeneficioMatricula(int matricula) 
+        public IEnumerable<Beneficio> GetBeneficioMatricula(string matricula) 
         {
             var beneficio = from b in db.Beneficios
                             where b.Beneficiario.Matricula == matricula

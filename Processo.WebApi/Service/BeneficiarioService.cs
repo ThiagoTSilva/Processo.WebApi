@@ -21,7 +21,7 @@ namespace Processo.WebApi.Service
             return _beneficiarioRepository.GetBeneficiario(beneficiario.Matricula).FirstOrDefault();
         }
 
-        public Beneficiario GetBeneficiario(int matricula)
+        public Beneficiario GetBeneficiario(string matricula)
         {
             return _beneficiarioRepository.GetBeneficiario(matricula).FirstOrDefault();
         }

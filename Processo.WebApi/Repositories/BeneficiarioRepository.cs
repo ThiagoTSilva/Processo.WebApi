@@ -14,7 +14,7 @@ namespace Processo.WebApi.Repositories
             db = context;
         }
 
-        public IEnumerable<Beneficiario> GetBeneficiario(int matricula)
+        public IEnumerable<Beneficiario> GetBeneficiario(string matricula)
         {
             var beneficiario = from b in db.Beneficiarios
                                where b.Matricula == matricula

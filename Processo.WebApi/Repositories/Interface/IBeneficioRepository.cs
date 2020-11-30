@@ -6,6 +6,6 @@ namespace Processo.WebApi.Repositories.Interface
 {
     public interface IBeneficioRepository : IBaseRepository<Beneficio>, IDisposable
     {
-        IEnumerable<Beneficio> GetBeneficioMatricula(int matricula);
+        IEnumerable<Beneficio> GetBeneficioMatricula(string matricula);
     }
 }

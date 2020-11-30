@@ -29,7 +29,7 @@ namespace Processo.WebApi.Service
                 var movimentacao = new Movimentacao
                 {
                     Id = lista.Id,
-                    Usuario = lista.Usuario,
+                    UsuarioId = lista.UsuarioId,
                     Origem = lista.Origem,
                     Destino = lista.Destino
                 };

@@ -29,7 +29,7 @@ namespace Processo.WebApi.Controllers
             if (movimentacaoLis.Count == 0)
                 return NoContent();
 
-            return Ok();
+            return Ok(movimentacaoLis);
         }
 
     }

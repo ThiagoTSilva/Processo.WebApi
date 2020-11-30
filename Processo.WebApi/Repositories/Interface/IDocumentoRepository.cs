@@ -6,6 +6,6 @@ namespace Processo.WebApi.Repositories.Interface
 {
     public interface IDocumentoRepository : IBaseRepository<Documento>, IDisposable
     {
-        IEnumerable<Documento> GetDocumentosAnexado(int matricula);
+        IEnumerable<Documento> GetDocumentosAnexado(string matricula);
     }
 }

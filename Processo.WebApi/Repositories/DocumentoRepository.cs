@@ -14,10 +14,10 @@ namespace Processo.WebApi.Repositories
             db = context;
         }
 
-        public IEnumerable<Documento> GetDocumentosAnexado(int matricula)
+        public IEnumerable<Documento> GetDocumentosAnexado(string matricula)
         {
             var doc = from d in db.Documentos
-                      where d.Beneficiario.Matricula == matricula
+                      where d.Matricula == matricula
                       select d;
 
             return doc;

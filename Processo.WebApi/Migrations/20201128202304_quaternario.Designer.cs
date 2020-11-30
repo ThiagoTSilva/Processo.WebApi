@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Processo.WebApi.Data;
 
 namespace Processo.WebApi.Migrations
 {
     [DbContext(typeof(ContextDb))]
-    partial class ContextDbModelSnapshot : ModelSnapshot
+    [Migration("20201128202304_quaternario")]
+    partial class quaternario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,13 +75,12 @@ namespace Processo.WebApi.Migrations
                     b.Property<byte[]>("Arquivo")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("Categoria")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Matricula")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("BeneficiarioId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BeneficiarioId");
 
                     b.ToTable("Documento");
                 });
@@ -94,19 +95,18 @@ namespace Processo.WebApi.Migrations
                     b.Property<string>("Acao")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DataTramitacao")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Destino")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Origem")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UsuarioId")
+                    b.Property<int?>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Movimentacao");
                 });
@@ -157,6 +157,24 @@ namespace Processo.WebApi.Migrations
                         .HasForeignKey("BeneficiarioId");
 
                     b.Navigation("Beneficiario");
+                });
+
+            modelBuilder.Entity("Processo.WebApi.Model.Documento", b =>
+                {
+                    b.HasOne("Processo.WebApi.Model.Beneficiario", "Beneficiario")
+                        .WithMany()
+                        .HasForeignKey("BeneficiarioId");
+
+                    b.Navigation("Beneficiario");
+                });
+
+            modelBuilder.Entity("Processo.WebApi.Model.Movimentacao", b =>
+                {
+                    b.HasOne("Processo.WebApi.Model.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Usuario");
                 });
 #pragma warning restore 612, 618
         }

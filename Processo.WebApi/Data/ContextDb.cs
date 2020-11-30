@@ -14,6 +14,7 @@ namespace Processo.WebApi.Data
         public DbSet<Documento> Documentos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Movimentacao> Movimentacaos { get; set; }
+        public DbSet<TipoBeneficio> TiposBeneficio { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,6 +23,7 @@ namespace Processo.WebApi.Data
             modelBuilder.Entity<Documento>().ToTable("Documento");
             modelBuilder.Entity<Usuario>().ToTable("Usuario");
             modelBuilder.Entity<Movimentacao>().ToTable("Movimentacao");
+            modelBuilder.Entity<TipoBeneficio>().ToTable("TipoBeneficio");
         }
     }
 }

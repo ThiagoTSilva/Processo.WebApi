@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public byte[] Arquivo { get; set; }
-        public Beneficiario Beneficiario { get; set; }
+        public string Matricula { get; set; }
+        public string Categoria { get; set; }
     }
 }

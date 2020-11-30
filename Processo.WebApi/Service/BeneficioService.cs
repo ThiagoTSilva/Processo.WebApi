@@ -1,10 +1,7 @@
 ﻿using Processo.WebApi.Model;
 using Processo.WebApi.Repositories.Interface;
 using Processo.WebApi.Service.Interface;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Processo.WebApi.Service
 {
@@ -16,7 +13,7 @@ namespace Processo.WebApi.Service
             _beneficioRepository = beneficioRepository;
         }
 
-        public Model.Beneficio Cadastrar(Model.Beneficio beneficio) 
+        public Model.Beneficio Cadastrar(Beneficio beneficio) 
         {
             _beneficioRepository.Save(beneficio);
             return _beneficioRepository.GetBeneficioMatricula(beneficio.Beneficiario.Matricula).FirstOrDefault();

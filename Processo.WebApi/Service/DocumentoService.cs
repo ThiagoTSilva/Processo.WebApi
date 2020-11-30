@@ -1,6 +1,10 @@
 ﻿using Processo.WebApi.Model;
+using Processo.WebApi.Model.Dto;
 using Processo.WebApi.Repositories.Interface;
 using Processo.WebApi.Service.Interface;
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Processo.WebApi.Service
 {
@@ -12,42 +16,47 @@ namespace Processo.WebApi.Service
             _documentoRepository = documentoRepository;
         }
 
-        public Documento AnexarArquivo(Documento documento)
+        public Documento AnexarArquivo(DocumentoDto documentoDto)
         {
-            Documento docBeneficiario = null;
+            //Limpar o Hash enviado
+            var data = new Regex(@"^data:application/pdf;base64,").Replace(documentoDto.Arquivo, "");
+
+            //Gerar um array de Bytes
+            var arquivo = Convert.FromBase64String(data);
+ 
+            var documento = new Documento
+            {
+                Arquivo = arquivo,
+                Categoria = documentoDto.Categoria,
+                Matricula = documentoDto.Matricula                
+            };
 
             _documentoRepository.Save(documento);
 
-             var doc = _documentoRepository.GetDocumentosAnexado(documento.Beneficiario.Matricula);
-
-            foreach (var d in doc) 
-            {
-                docBeneficiario = new Documento
-                {
-                    Id = d.Id,
-                    Arquivo = d.Arquivo,
-                    Beneficiario = d.Beneficiario
-                };
-            }
-            return docBeneficiario;
+             var doc = _documentoRepository.GetDocumentosAnexado(documento.Matricula);
+            return this.Converte(doc);
         }
 
-        public Documento GetDocumentoAnexado(int matricula)
+        public Documento GetDocumentoAnexado(string matricula)
         {
-            Documento doc = null;
             var anexo = _documentoRepository.GetDocumentosAnexado(matricula);
-            foreach (var docAnexo in anexo) 
+            return this.Converte(anexo);
+        }
+
+        private Documento Converte(IEnumerable<Documento> anexo) 
+        {
+            Documento documento = null;
+            foreach (var docAnexo in anexo)
             {
-                doc = new Documento
+                documento = new Documento
                 {
-                    Id = doc.Id,
-                    Arquivo = doc.Arquivo,
-                    Beneficiario = doc.Beneficiario
+                    Id = docAnexo.Id,
+                    Arquivo = docAnexo.Arquivo,
+                    Matricula = docAnexo.Matricula
                 };
-
+             
             }
-
-            return doc;
+            return documento;
         }
     }
 }

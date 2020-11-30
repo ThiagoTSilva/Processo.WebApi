@@ -6,7 +6,7 @@
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public string Orgao { get; set; }
-        public int Matricula { get; set; }
+        public string Matricula { get; set; }
 
     }
 }
