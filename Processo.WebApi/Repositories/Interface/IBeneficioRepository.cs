@@ -7,5 +7,7 @@ namespace Processo.WebApi.Repositories.Interface
     public interface IBeneficioRepository : IBaseRepository<Beneficio>, IDisposable
     {
         IEnumerable<Beneficio> GetBeneficioMatricula(string matricula);
+        IEnumerable<Beneficio> GetBeneficioIdBeneficiario(int beneficiarioId);
+
     }
 }

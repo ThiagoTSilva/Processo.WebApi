@@ -18,7 +18,7 @@ namespace Processo.WebApi.Repositories
         {
             var beneficiario = from b in db.Beneficiarios
                                where b.Matricula == matricula
-                               select b;
+                               select b ;
 
             return beneficiario;
         }

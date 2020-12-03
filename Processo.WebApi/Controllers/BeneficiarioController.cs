@@ -22,13 +22,13 @@ namespace Processo.WebApi.Controllers
             _documentoService = documentoService;
         }
 
-        [HttpPost]
-        public IActionResult Post(Beneficiario beneficio)
-        {
-            var beneficiario = _beneficiarioService.CadastarBeneficio(beneficio);
+        //[HttpPost]
+        //public IActionResult Post(Beneficiario beneficio)
+        //{
+        //    var beneficiario = _beneficiarioService.CadastarBeneficio(beneficio);
             
-            return Created($"{Request.Path}/{beneficiario.Id}", beneficiario);
-        }
+        //    return Created($"{Request.Path}/{beneficiario.Id}", beneficiario);
+        //}
 
         [HttpGet("{matricula}")]
         public IActionResult Get(string matricula)
@@ -68,11 +68,12 @@ namespace Processo.WebApi.Controllers
             var anexo = _documentoService.GetDocumentoAnexado(matricula);
             string base64String = string.Empty;
 
-            if (anexo != null) { 
+            if (anexo != null)
+            {
                 base64String = Convert.ToBase64String(anexo.Arquivo, 0, anexo.Arquivo.Length);
-                base64String = "data:application / pdf; base64," + base64String;
-             }
-            
+                //base64String = "data:application/pdf; base64," + base64String;
+            }
+
             if (anexo == null)
                 return NoContent();
 

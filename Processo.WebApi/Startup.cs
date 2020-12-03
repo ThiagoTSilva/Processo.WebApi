@@ -14,6 +14,8 @@ namespace Processo.WebApi
 {
     public class Startup
     {
+        public IWebHostEnvironment Env { get; set; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -53,11 +55,13 @@ namespace Processo.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment webHostEnvironment)
         {
+            Env = webHostEnvironment;
+
             app.UseCors("AllowAll");
 
-            if (env.IsDevelopment())
+            if (Env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }

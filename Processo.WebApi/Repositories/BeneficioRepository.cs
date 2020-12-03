@@ -23,5 +23,13 @@ namespace Processo.WebApi.Repositories
             return beneficio;
         }
 
+        public IEnumerable<Beneficio> GetBeneficioIdBeneficiario(int beneficiarioId) 
+        {
+            return from bn in db.Beneficios
+                   where bn.Beneficiario.Id == beneficiarioId
+                   select bn;
+            
+        }
+
     }
 }
